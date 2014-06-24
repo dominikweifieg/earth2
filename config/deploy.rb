@@ -1,5 +1,3 @@
-require "rvm/capistrano"
-
 set :application, "earth2" 
 set :repository,  "git@github.com:dominikweifieg/earth2.git"
 set :domain, "ikreawi.de"
