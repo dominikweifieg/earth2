@@ -1,5 +1,5 @@
-set :application, "licenseserver" 
-set :repository,  "git@github.com:budiljak/kreawi_licenseserver.git"
+set :application, "earth2" 
+set :repository,  "git@github.com:dominikweifieg/earth2.git"
 set :domain, "ikreawi.de"
 set :use_sudo, false
 set :user, "deployer"
