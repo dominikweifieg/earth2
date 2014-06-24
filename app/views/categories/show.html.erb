@@ -1,0 +1,63 @@
+<p>
+  <strong>Title:</strong>
+  <%= @category.title %>
+</p>
+
+<p>
+  <strong>Short title:</strong>
+  <%= @category.short_title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @category.description %>
+</p>
+
+<p>
+  <strong>Identifier:</strong>
+  <%= @category.identifier %>
+</p>
+
+<p>
+  <strong>Old uid:</strong>
+  <%= @category.old_uid %>
+</p>
+
+<p>
+  <strong>App name:</strong>
+  <%= @category.app_name %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @category.area %>
+</p>
+
+<% if @category.original_pruefung %>
+<p>
+  <strong>Original Pr&uuml;fung:</strong>
+  X
+</p>
+<% else %>
+<p>
+  <strong>Type:</strong>
+  <% if @category.type_id == -1 %>&nbsp;
+  <% elsif @category.type_id == 0 %>Basic
+  <% elsif @category.type_id == 1 %>Advanced
+  <% elsif @category.type_id == 2 %>Professional<%end%>
+</p>
+<% end %>
+
+<p>
+  <strong>Importiert von <% if @category.old_type == 'set' %>
+    <%= link_to "KQuest Fragenset #{@category.title}", kquest_question_set_path(@category.old_uid) %><% else %>
+    <%= link_to "KQuest Kategory #{@category.title}", kquest_category_path(@category.old_uid) %><% end %></strong>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
+
+<h2>Questions</h2>
+<ol>
+	<%= render :partial => @category.questions %>
+</ol>

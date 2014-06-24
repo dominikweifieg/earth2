@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to entry[:kcat].html_safe, kquest_category_path(entry[:kcat_id]) %></td>
+  <td><% if entry[:kcat_active] %>X<% end %></td>
+  <td><%= link_to entry[:kset].html_safe, kquest_question_set_path(entry[:kset_id]) %></td>
+  <td><% if entry[:kset_active] %>X<% end %></td>
+  <td><%= link_to entry[:app].html_safe, app_path(entry[:app]) %></td>
+</tr>

@@ -1,0 +1,12 @@
+<h2><%= @category.cat_title %></h2>
+
+<% if @imported %>
+Diese Kategorie wurde schon einmal importiert. Importierte Kategorie: <%= link_to @earth_category.title.html_safe, @earth_category %> (<%= @earth_category.identifier.html_safe %>)<br/>
+<%= link_to "Erneut Importieren", kquest_category_path(@category, :import => true), :confirm => "Diese Kategorie wurde bereits importiert. Das erneute Importieren löscht die Kategorie und alle Ihre Fragen inklusive der Änderungen die evt. vorgenommern wurden" %>
+<% else %>
+<%= link_to "Importieren", kquest_category_path(@category, :import => true), :import => true %>
+<% end %>
+
+<ol>
+<%= render :partial => @category.kquest_questions %>	
+</ol>

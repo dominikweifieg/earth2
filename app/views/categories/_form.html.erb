@@ -1,0 +1,53 @@
+<%= form_for(@category) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :short_title %><br>
+    <%= f.text_field :short_title %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :identifier %><br>
+    <%= f.text_field :identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :old_uid %><br>
+    <%= f.number_field :old_uid %>
+  </div>
+  <div class="field">
+    <%= f.label :app_name %><br>
+    <%= f.text_field :app_name %>
+  </div>
+  <div class="field">
+    <%= f.label :area %><br>
+    <%= f.text_field :area %>
+  </div>
+  <div class="field">
+    <%= f.label :original_pruefung %><br />
+    <%= f.check_box :original_pruefung %>
+  </div>
+  <div class="field">
+    <%= f.label :type_id %><br />
+    <%= f.select :type_id, Category::STATUS %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

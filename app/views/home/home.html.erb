@@ -1,0 +1,19 @@
+  <%= form_tag root_path, method: "get"  do %>
+  <%= label_tag(:q, "Suchen nach: ")%>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Suchen")%>
+  <% end %>
+  <br/>
+  
+<table border="1" cellpadding="10">
+  <tr>
+    <th>Alle KQuest Kategorien</th>
+    <th>Aktiv</th>
+    <th>Alle KQuest Sets</th>
+    <th>Aktiv</th>
+    <th>Alle Apps</th>
+  </tr>
+  
+  
+  <%= render partial: "entry", collection: @combined, as: :entry %>
+</table>

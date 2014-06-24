@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Earth2</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <h1>iKreawi Earth</h1>
+  <div class="navigation"><ul><li><% if user_signed_in? %><%= link_to "Log out", destroy_user_session_path, method: :delete %>
+                          <% else %><%= link_to "Log in", new_user_session_path %><% end %></li>
+                          <li><%= link_to "Home", root_path %></li>
+                          <li><%= link_to "Apps", apps_path %></li>
+                          <li><%= link_to "Categories", categories_path %></li>
+                          <li><%= link_to "KQuest Kategorien", kquest_categories_path %></li>
+                          <li><%= link_to "KQuest Fragensets", kquest_question_sets_path %></li>
+                        </ul>
+  </div>
+  
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+</html>
