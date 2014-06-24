@@ -3,6 +3,8 @@ set :repository,  "git@github.com:dominikweifieg/earth2.git"
 set :domain, "ikreawi.de"
 set :use_sudo, false
 set :user, "deployer"
+
+set :rake, "/home/deployer/.rvm/gems/ruby-1.9.3-p448@global/bin/rake"
 # If you have previously been relying upon the code to start, stop 
 # and restart your mongrel application, or if you rely on the database
 # migration code, please uncomment the lines you require below
