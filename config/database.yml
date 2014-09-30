@@ -20,7 +20,7 @@ test:
 
 production:
   adapter: mysql
-  database: earth_production
+  database: earth2_production
   username: ikreawi
   password: iwaerki
   encoding: utf8
