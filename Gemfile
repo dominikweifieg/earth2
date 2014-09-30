@@ -49,7 +49,7 @@ gem "imobile"
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
-gem 'capistrano', '=2.15.2', group: :development
+gem 'capistrano', :github => "capistrano/capistrano", :tag => '2.15.5', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
