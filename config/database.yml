@@ -32,3 +32,11 @@ kquest:
   password: kpEGCMh4N9
   database: usr_p25134_8
   encoding: utf8
+
+legacy: 
+  adapter: mysql
+  host: db1131.mydbserver.com
+  username: p25134d6
+  password: 9LK2EMWCQFDkiK
+  database: usr_p25134_11
+  encoding: utf8
