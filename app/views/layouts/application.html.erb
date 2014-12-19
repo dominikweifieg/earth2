@@ -10,7 +10,7 @@
   <h1>iKreawi Earth</h1>
   <div class="navigation"><ul><li><% if user_signed_in? %><%= link_to "Log out", destroy_user_session_path, method: :delete %>
                           <% else %><%= link_to "Log in", new_user_session_path %><% end %></li>
-                          <li><%= link_to "Home", root_path %></li>
+                          <!--<li><%= link_to "Home", root_path %></li> -->
                           <li><%= link_to "Apps", apps_path %></li>
                           <li><%= link_to "Sets", categories_path %></li>
                           <li><%= link_to "Kategorien", typo3_index_path %></li>
