@@ -1,3 +1,5 @@
+<h2>Kreawi Kategorie</2>
+
 <p>
   <strong>Title:</strong>
   <%= @category.title %>
@@ -58,16 +60,10 @@
 </p>
 <% end %>
 
-<p>
-  <strong>Importiert von <% if @category.old_type == 'set' %>
-    <%= link_to "KQuest Fragenset #{@category.title}", kquest_question_set_path(@category.old_uid) %><% else %>
-    <%= link_to "KQuest Kategory #{@category.title}", kquest_category_path(@category.old_uid) %><% end %></strong>
-</p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Back', typo3_index_path %>
 
 <h2>Questions</h2>
 <ol>
-	<%= render :partial => @category.questions %>
+	<%= render :partial => @questions %>
 </ol>

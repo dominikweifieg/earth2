@@ -1,0 +1,21 @@
+<h2>Kategorien aus Typo3</h2>
+<%= form_tag({controller: 'categories', action: 'new'}, method: 'get') do %>
+  <table class="kategorien" cellpadding="6px">
+    <thead>
+      <tr>
+        <th>Kategorie Name</th>
+        <th>Fragen</th>
+        <th>Fragen ID</th>
+        <th>Verwendet in</th>
+        <th>IN-APP</th>
+        <th>Markieren</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "typo3/category", collection: @categories %>
+    </tbody>
+    
+  </table>
+  <br/><br/>
+  <%= submit_tag("Neue IN APP Purchase Kategorie mit selektierten Fragen erzeugen!") %>
+<% end %>

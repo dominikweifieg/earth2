@@ -24,12 +24,14 @@ class KquestCategoriesController < ApplicationController
       category.touch
     else
       category = Category.new(:title => legacy_category.cat_title, :description => legacy_category.cat_title, 
-        :old_uid => legacy_category.cid, :old_type => 'cat', :identifier => "de.kreawi.mobile.#{legacy_category.cat_title.parameterize('_')}".sub(/-/, "_"), :app_name => "")
+        :old_uid => legacy_category.cid, :old_type => 'cat', :identifier => "de.kreawi.mobile.#{legacy_category.cat_title.parameterize('_')}".sub(/-/, "_"), :app_name => "", :is_iap => false)
     end
     
     legacy_category.kquest_questions.each do |legacy_question|
       next if legacy_question.deleted == 1
       question = Question.new do |q|
+        q.old_type = 'cat'
+        q.old_uid = legacy_question.uid
         body = legacy_question.question
         if(legacy_question.questiontype == 2)
           body << "\t\t<ol>"

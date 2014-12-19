@@ -1,4 +1,10 @@
 <%= form_for(@category) do |f| %>
+  <% if @source_category %>
+    <%= hidden_field_tag :source_category, @source_category.id %>
+  <% end %>
+  <% if @selected_questions %>
+    <%= hidden_field_tag :selected_questions, @selected_questions %>
+  <% end %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -26,6 +32,10 @@
   <div class="field">
     <%= f.label :identifier %><br>
     <%= f.text_field :identifier %>
+  </div>
+  <div class="field">
+    <%= f.label :old_type %><br>
+    <%= f.text_field :old_type %>
   </div>
   <div class="field">
     <%= f.label :old_uid %><br>

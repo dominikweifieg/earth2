@@ -1,0 +1,8 @@
+$("#app_content").empty()
+$("#app_content").append("<h3>In App Purchases fuer App: <%= @app_name %></h3>")
+$("#app_content").append('<table class="apps" width="100%" cellpadding="6px" style="border: 2px solid #3333CC; border-collapse: collapse;">')
+$("#app_content").append('<thead>')
+$("#app_content").append('<tr><th style="border: 2px solid #3333CC; border-collapse: collapse; background-color: #3333CC;">APPLE Kategorien InApp</th><th style="border: 2px solid #3333CC; border-collapse: collapse; background-color: #3333CC;">Kategorie/Set</th><th style="border: 2px solid #3333CC; border-collapse: collapse; background-color: #3333CC;">Frage</th><th style="border: 2px solid #3333CC; border-collapse: collapse; background-color: #3333CC;">Fragen Ids</th><th style="border: 2px solid #3333CC; border-collapse: collapse; background-color: #3333CC;">Fragen Anzahl</th></tr>')
+$("#app_content").append('<%= render partial: "apps/category", collection: @categories %>')
+$("#app_content").append('</thead>')
+$("#app_content").append('</table>')

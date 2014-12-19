@@ -1,36 +1,30 @@
 <h2>Listing categories</h2>
 
-<table>
+<table class="sets" cellpadding="6px">
   <thead>
     <tr>
       <th>Title</th>
-      <th>Short title</th>
-      <th>Description</th>
-      <th>Identifier</th>
-      <th>Old uid</th>
-      <th>App name</th>
-      <th>Area</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Herkunft</th>
+      <th>Wird verwendet in</th>
+      <th>IN APP</th>
+      <th>Fragen markieren</th>
     </tr>
   </thead>
 
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= category.title %></td>
-        <td><%= category.short_title %></td>
-        <td><%= category.description %></td>
-        <td><%= category.identifier %></td>
-        <td><%= category.old_uid %></td>
-        <td><%= category.app_name %></td>
-        <td><%= category.area %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to category.title, category %></td>
+        <td>KQuest <%= category.old_type %></td>
+        <td><% if category.in_app_category %><%= category.in_app_category.app_name %><% end %></td>
+        <td><% if category.in_app_category %><%= category.in_app_category.identifier %><% end %></td>
+        <td><%= link_to "In App Purchase erstellen", new_category_path(id: category) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<p>
+<%= link_to "Neues Set aus KQuest importieren", kquest_question_sets_path %><br/>
+<%= link_to "Neue Kategorie aus KQuest importieren", kquest_categories_path %>
 

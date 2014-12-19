@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618121937) do
+ActiveRecord::Schema.define(version: 20141215160514) do
 
   create_table "answers", force: true do |t|
     t.text     "body"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140618121937) do
     t.datetime "updated_at"
   end
 
-  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "title"
@@ -36,7 +36,16 @@ ActiveRecord::Schema.define(version: 20140618121937) do
     t.datetime "updated_at"
     t.boolean  "original_pruefung"
     t.integer  "type_id",           default: -1
+    t.boolean  "is_iap",            default: false
   end
+
+  create_table "category_questions", force: true do |t|
+    t.integer "category_id"
+    t.integer "question_id"
+  end
+
+  add_index "category_questions", ["category_id"], name: "index_category_questions_on_category_id", using: :btree
+  add_index "category_questions", ["question_id"], name: "index_category_questions_on_question_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.text     "body"
@@ -44,9 +53,11 @@ ActiveRecord::Schema.define(version: 20140618121937) do
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "old_uid"
+    t.string   "old_type"
   end
 
-  add_index "questions", ["category_id"], name: "index_questions_on_category_id"
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -63,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140618121937) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

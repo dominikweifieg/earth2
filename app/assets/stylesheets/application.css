@@ -22,3 +22,45 @@ div.navigation li {
   padding: 1em;
   font-size: 14pt;
 }
+
+div.app_list ul { 
+  list-style-type: none;
+  display: inline;
+}
+
+div.app_list li {
+  display: inline;
+  padding: 0.2em;
+  font-size: 10pt;
+  color: #3333CC;
+}
+
+table {
+  width: 100%;
+}
+
+table.kategorien, table.kategorien th, table.kategorien td {
+    border: 2px solid #CC3333;
+    border-collapse: collapse;
+}
+table.kategorien th {
+  background-color: #CC3333;
+}
+
+table.sets, table.sets th, table.sets td {
+    border: 2px solid #33CC33;
+    border-collapse: collapse;
+}
+
+table.apps th {
+  background-color: #33CC33;
+}
+
+table.apps, table.sets th, table.sets td {
+    border: 2px solid #3333CC;
+    border-collapse: collapse;
+}
+
+table.apps th {
+  background-color: #3333CC;
+}

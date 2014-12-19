@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
       when Mime::JSON
         @categories = Category.find(:all, :conditions => ["app_name = :app_name", {:app_name => app_name}])
       else
-        @categories = Category.all
+        @categories = Category.not_in_app.kquest.all
       end
     end
     respond_to do |format|
@@ -36,11 +36,29 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    respond_to do |format|
+      format.html {}
+      format.js {  headers['Content-Type'] = 'text/javascript' }
+    end
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    if params[:id].present?
+      @source_category = Category.find_by_id(params[:id])
+      @category.title = @source_category.title
+      @category.short_title = @source_category.short_title
+      @category.description = "Created from #{@source_category.title} (KQuest #{@source_category.old_type}:#{@source_category.old_uid})"
+      @category.old_type = @source_category.old_type
+      @category.old_uid = @source_category.old_uid
+      @category.app_name = @source_category.app_name
+      @category.area = @source_category.area
+      @category.original_pruefung = @source_category.original_pruefung
+      @category.type_id = @source_category.type_id
+    elsif params[:questions].present?
+      @selected_questions = params[:questions].keys.join("_")
+    end
   end
 
   # GET /categories/1/edit
@@ -51,6 +69,16 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+    if params[:source_category].present?
+      @source_category = Category.find_by_id(params[:source_category])
+      @category.questions << @source_category.questions
+      @category.is_iap = true
+    elsif params[:selected_questions].present?
+      questIds = params[:selected_questions].split("_")
+      questions = Question.find(questIds)
+      @category.questions = questions
+      @category.is_iap = true
+    end
 
     respond_to do |format|
       if @category.save
@@ -102,7 +130,7 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:title, :short_title, :description, :identifier, :old_uid, :app_name, :area, :original_pruefung, :type_id)
+      params.require(:category).permit(:title, :short_title, :description, :identifier, :old_uid, :app_name, :area, :original_pruefung, :type_id, :old_type)
     end
     
     def check_itunes_receipt(receipt)

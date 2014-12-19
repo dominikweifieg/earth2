@@ -2,17 +2,28 @@
 
 <p>
   <strong>Body:</strong>
-  <%= @question.body %>
+  <%= @question.body.html_safe %>
+</p>
+
+<p>
+  <strong>Answers:</strong>
+  <ol>
+    <%= render :partial => @question.answers %>
+  </ol>
 </p>
 
 <p>
   <strong>Comment:</strong>
-  <%= @question.comment %>
+  <%= @question.comment.html_safe %>
 </p>
 
+
+
 <p>
-  <strong>Category:</strong>
-  <%= @question.category %>
+  <strong>Categories:</strong>
+  <ul>
+    <%= render :partial => @question.categories %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_question_path(@question) %> |
