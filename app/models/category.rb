@@ -1,6 +1,9 @@
 class Category < ActiveRecord::Base
   
     # has_many :questions, :dependent => :destroy, :order => :id
+    validates :identifier, :title, :short_title, presence: true
+    validates :identifier, uniqueness: true 
+    
     
     has_many :category_questions, :dependent => :destroy
     has_many :questions, through: :category_questions
@@ -9,7 +12,7 @@ class Category < ActiveRecord::Base
     
     scope :in_app, -> { where(is_iap: true) }
     scope :not_in_app, -> { where(is_iap: false) }
-    scope :typo3, -> {where(old_type: 'typo3')}
+    scope :typo3, -> {where(old_type: 'typo3', is_iap: false)}
     scope :kquest, -> {where(old_type: ['set','cat'])}
     
     STATUS = [['', -1], ['Basic', '0'], ['Advanced', '1'], ['Professional', '2']]

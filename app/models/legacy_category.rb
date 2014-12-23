@@ -39,7 +39,7 @@ class LegacyCategory < ActiveRecord::Base
     
       lc.legacy_questions.each do |legacy_question|
         next if legacy_question.deleted == 1
-        question = Question.find_by_old_uid(legacy_question.uid)
+        question = Question.find_by_old_uid_and_old_type(legacy_question.uid, 'typo3')
         if question
           question.answers.clear
           question.old_type = 'typo3'

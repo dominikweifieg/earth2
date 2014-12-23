@@ -57,7 +57,19 @@ class CategoriesController < ApplicationController
       @category.original_pruefung = @source_category.original_pruefung
       @category.type_id = @source_category.type_id
     elsif params[:questions].present?
-      @selected_questions = params[:questions].keys.join("_")
+      logger.info("New Selected questions = #{@selected_questions}")
+      @selected_questions ||= params[:questions].keys.join("_")
+      first_question = Question.find_by_id(params[:questions].keys.first)
+      @source_category = first_question.import_category
+      @category.title = @source_category.title
+      @category.short_title = @source_category.short_title
+      @category.description = "Created from #{@source_category.title} (Typo3 Katgorie:#{@source_category.old_uid})"
+      @category.old_type = @source_category.old_type
+      @category.old_uid = @source_category.old_uid
+      @category.app_name = "iKreawi"
+      @category.area = ""
+      @category.original_pruefung = @source_category.original_pruefung
+      @category.type_id = @source_category.type_id
     end
   end
 
@@ -69,15 +81,17 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-    if params[:source_category].present?
-      @source_category = Category.find_by_id(params[:source_category])
-      @category.questions << @source_category.questions
-      @category.is_iap = true
-    elsif params[:selected_questions].present?
+    if params[:selected_questions].present?
+      @selected_questions = params[:selected_questions]
+      logger.info("Create Selected questions = #{@selected_questions}")
       questIds = params[:selected_questions].split("_")
       questions = Question.find(questIds)
       @category.questions = questions
       @category.is_iap = true
+    elsif params[:source_category].present?
+        @source_category = Category.find_by_id(params[:source_category])
+        @category.questions << @source_category.questions
+        @category.is_iap = true
     end
 
     respond_to do |format|
@@ -108,10 +122,13 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
     respond_to do |format|
-      format.html { redirect_to categories_url }
+      format.html { 
+        @category.destroy
+        redirect_to categories_url 
+      }
       format.json { head :no_content }
+      format.js {  headers['Content-Type'] = 'text/javascript' }
     end
   end
   
