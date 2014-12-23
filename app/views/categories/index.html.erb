@@ -8,6 +8,7 @@
       <th>Wird verwendet in</th>
       <th>IN APP</th>
       <th>Fragen markieren</th>
+      <th>Set l&ouml;schen</th>
     </tr>
   </thead>
 
@@ -17,8 +18,9 @@
         <td><%= link_to category.title, category %></td>
         <td>KQuest <%= category.old_type %></td>
         <td><% if category.in_app_category %><%= category.in_app_category.app_name %><% end %></td>
-        <td><% if category.in_app_category %><%= category.in_app_category.identifier %><% end %></td>
+        <td><% if category.in_app_category %><%= link_to category.in_app_category.identifier, category.in_app_category %><% end %></td>
         <td><%= link_to "In App Purchase erstellen", new_category_path(id: category) %></td>
+        <td><%= link_to 'L&ouml;schen'.html_safe, category, method: :delete, data: { confirm: 'Ganz sicher?' } %>
       </tr>
     <% end %>
   </tbody>

@@ -10,7 +10,7 @@
 
 <p>
   <strong>IN APP Purchase</strong>
-  <% if @category.is_iap %>JA<% else %>NEIN<% end %>
+  <% if @category.is_iap %>JA <%= link_to 'L&ouml;schen'.html_safe, @category, method: :delete, data: { confirm: 'Ganz sicher?' } %><% else %>NEIN<% end %>
 </p>
 
 <p>
