@@ -1,1 +1,2 @@
-$("#category_<%=@category.id%>").after('<%= render partial: 'typo3/question', collection: @questions %>')
+$("#category_<%=@category.id%>").after('<%= render partial: 'typo3/question', collection: @questions, locals: {category: @category} %>')
+$("#category_<%=@category.id%>").replaceWith('<%= render partial: 'typo3/hide_category', locals: {category: @category} %>')

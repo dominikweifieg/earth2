@@ -12,4 +12,13 @@ class Typo3Controller < ApplicationController
       format.js {}
     end
   end
+  
+  def destroy
+    @category = Category.typo3.find_by_id(params[:id])
+    @questions = @category.questions
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+  end
 end

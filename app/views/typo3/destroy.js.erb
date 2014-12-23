@@ -1,0 +1,2 @@
+$(".category_question_<%= @category.id %>").remove()
+$("#category_<%=@category.id%>").replaceWith('<%= render partial: 'typo3/category', locals: {category: @category}%>')
