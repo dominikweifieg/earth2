@@ -34,7 +34,7 @@ class LegacyCategory < ActiveRecord::Base
         category.touch
       else
         puts "Create category"
-        category = Category.new(:title => myTitle, :description => myTitle, 
+        category = Category.new(:title => myTitle, :short_title => myTitle, :description => myTitle, 
           :old_uid => lc.uid, :old_type => 'typo3', :identifier => "de.kreawi.mobile.#{myTitle.parameterize('_')}".sub(/-/, "_"), :app_name => "iKreawi", :is_iap => false)
           category.save!
       end

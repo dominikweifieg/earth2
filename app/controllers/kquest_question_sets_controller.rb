@@ -23,7 +23,7 @@ class KquestQuestionSetsController < ApplicationController
       # category.questions.clear
       category.touch
     else
-      category = Category.new(:title => legacy_category.set_name, :description => legacy_category.set_name, 
+      category = Category.new(:title => legacy_category.set_name, :short_title => legacy_category.set_name, :description => legacy_category.set_name, 
         :old_uid => legacy_category.set_id, :old_type => 'set' , :identifier => "de.kreawi.mobile.#{legacy_category.set_name.parameterize('_')}".sub(/-/, "_"), :app_name => "", :is_iap => false)
     end
     
