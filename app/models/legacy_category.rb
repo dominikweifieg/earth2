@@ -36,6 +36,7 @@ class LegacyCategory < ActiveRecord::Base
         puts "Create category"
         category = Category.new(:title => myTitle, :description => myTitle, 
           :old_uid => lc.uid, :old_type => 'typo3', :identifier => "de.kreawi.mobile.#{myTitle.parameterize('_')}".sub(/-/, "_"), :app_name => "iKreawi", :is_iap => false)
+          category.save!
       end
     
       lc.legacy_questions.each do |legacy_question|
@@ -92,7 +93,7 @@ class LegacyCategory < ActiveRecord::Base
           end
           category.questions << question  
         end
-        question.save
+        question.save!
         unless(legacy_question.questiontype == 3)
           a1 = Answer.new(:body => legacy_question.answer_a, :correct => (legacy_question.correct_answers | 1 == legacy_question.correct_answers))
           question.answers << a1
@@ -111,7 +112,7 @@ class LegacyCategory < ActiveRecord::Base
           a5.save
         end
       end
-      category.save
+      category.save!
     end
   end
 end
