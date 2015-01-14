@@ -28,11 +28,12 @@ class LegacyCategory < ActiveRecord::Base
       puts "Title encoding: #{lc.title.encoding}"
       puts "myTitle encoding: #{myTitle.encoding}"
       category = Category.find_by_old_uid_and_old_type(lc.uid, 'typo3')
-      puts "Found? #{category.title}"
       if(category)
         # category.questions.clear
+        puts "Found? #{category.title}"
         category.touch
       else
+        puts "Create category"
         category = Category.new(:title => myTitle, :description => myTitle, 
           :old_uid => lc.uid, :old_type => 'typo3', :identifier => "de.kreawi.mobile.#{myTitle.parameterize('_')}".sub(/-/, "_"), :app_name => "iKreawi", :is_iap => false)
       end
