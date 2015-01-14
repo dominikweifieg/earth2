@@ -28,7 +28,7 @@ class LegacyCategory < ActiveRecord::Base
       puts "Title encoding: #{lc.title.encoding}"
       puts "myTitle encoding: #{myTitle.encoding}"
       category = Category.find_by_old_uid_and_old_type(lc.uid, 'typo3')
-      puts "Found? #{category}"
+      puts "Found? #{category.title}"
       if(category)
         # category.questions.clear
         category.touch
@@ -38,6 +38,7 @@ class LegacyCategory < ActiveRecord::Base
       end
     
       lc.legacy_questions.each do |legacy_question|
+        puts "Question: #{legacy_question.title}"
         next if legacy_question.deleted == 1
         question = Question.find_by_old_uid_and_old_type(legacy_question.uid, 'typo3')
         if question
