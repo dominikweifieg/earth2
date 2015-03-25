@@ -45,7 +45,11 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
-    if params[:id].present?
+    if params[:commit] == "addieren"
+      @category = Category.find_by_id(params[:existing_in_app])
+      @selected_questions ||= params[:questions].keys.join("_")
+      @existing_in_app = params[:existing_in_app]
+    elsif params[:id].present?
       @source_category = Category.find_by_id(params[:id])
       @category.title = @source_category.title
       @category.short_title = @source_category.short_title
@@ -80,7 +84,11 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.json
   def create
-    @category = Category.new(category_params)
+    if params[:existing_in_app].present?
+      @category = Category.find_by_id(params[:existing_in_app])
+    else 
+      @category = Category.new(category_params)
+    end 
     if params[:selected_questions].present?
       @selected_questions = params[:selected_questions]
       logger.info("Create Selected questions = #{@selected_questions}")
@@ -108,6 +116,13 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+    if params[:selected_questions].present?
+      @selected_questions = params[:selected_questions]
+      logger.info("Create Selected questions = #{@selected_questions}")
+      questIds = params[:selected_questions].split("_")
+      questions = Question.find(questIds)
+      @category.questions << questions
+    end
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }

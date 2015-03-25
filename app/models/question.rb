@@ -14,4 +14,8 @@ class Question < ActiveRecord::Base
   def import_category
     self.categories.not_in_app.first()
   end
+  
+  def oral
+    self.answers.count == 0
+  end
 end

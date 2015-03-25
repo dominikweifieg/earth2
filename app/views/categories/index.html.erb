@@ -15,7 +15,7 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= link_to category.title, category %></td>
+        <td><%= link_to category.title, category %> (<%= category.questions.count %> Fragen)</td>
         <td>KQuest <%= category.old_type %></td>
         <td><% if category.in_app_category %><%= category.in_app_category.app_name %><% end %></td>
         <td><% if category.in_app_category %><%= link_to category.in_app_category.identifier, category.in_app_category %><% end %></td>

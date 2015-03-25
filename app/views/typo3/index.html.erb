@@ -17,5 +17,6 @@
     
   </table>
   <br/><br/>
-  <%= submit_tag("Neue IN APP Purchase Kategorie mit selektierten Fragen erzeugen!") %>
+  <%= submit_tag("Neue IN APP Purchase Kategorie mit selektierten Fragen erzeugen!") %>&nbsp;&nbsp;&nbsp;
+  Zu IN APP Purchase <%= select_tag :existing_in_app, options_from_collection_for_select(@inApps, "id", "title")%> <%= submit_tag("addieren")%>
 <% end %>

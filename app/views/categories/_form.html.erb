@@ -5,6 +5,9 @@
   <% if @selected_questions %>
     <%= hidden_field_tag :selected_questions, @selected_questions %>
   <% end %>
+  <% if @existing_in_app %>
+    <%= hidden_field_tag :existing_in_app, @existing_in_app %>
+  <% end %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>

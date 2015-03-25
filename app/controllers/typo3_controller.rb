@@ -2,6 +2,8 @@ class Typo3Controller < ApplicationController
   before_action :authenticate_user!
   def index
     @categories = Category.typo3
+    
+    @inApps = Category.in_app
   end
   
   def show
