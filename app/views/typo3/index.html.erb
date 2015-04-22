@@ -1,4 +1,8 @@
 <h2>Kategorien aus Typo3</h2>
+  <p>
+    <h3>Filter:</h3><button id="all">Alle</button>&nbsp;<button id="oral">M&uuml;ndlich</button>&nbsp;<button id="mc">Schriftlich</button>
+  </p>
+
 <%= form_tag({controller: 'categories', action: 'new'}, method: 'get') do %>
   <table class="kategorien" cellpadding="6px">
     <thead>
@@ -20,3 +24,21 @@
   <%= submit_tag("Neue IN APP Purchase Kategorie mit selektierten Fragen erzeugen!") %>&nbsp;&nbsp;&nbsp;
   Zu IN APP Purchase <%= select_tag :existing_in_app, options_from_collection_for_select(@inApps, "id", "title")%> <%= submit_tag("addieren")%>
 <% end %>
+
+<script type="text/javascript">
+var rows = $('table.kategorien tr');
+
+$('#oral').click(function() {
+    var oral = rows.filter('.oral').show();
+    rows.not( oral ).hide();
+});
+
+$('#mc').click(function() {
+    var mc = rows.filter('.mc').show();
+    rows.not( mc ).hide();
+});
+
+$('#all').click(function() {
+    rows.show();
+});
+</script>
