@@ -55,10 +55,13 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
-    @question.destroy
+    #@question.destroy
+    category = Category.find(params[:category])
+    category.questions.delete(@question)
     respond_to do |format|
       format.html { redirect_to questions_url }
       format.json { head :no_content }
+      format.js {  headers['Content-Type'] = 'text/javascript' }
     end
   end
 

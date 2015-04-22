@@ -21,6 +21,8 @@ Earth2::Application.routes.draw do
   
   resources :typo3
   
+  resources :questions
+  
   root to: "apps#index"
   
   # The priority is based upon order of creation: first created -> highest priority.
