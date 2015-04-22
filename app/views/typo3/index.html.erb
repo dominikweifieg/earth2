@@ -29,16 +29,20 @@
 var rows = $('table.kategorien tr');
 
 $('#oral').click(function() {
-    var oral = rows.filter('.oral').show();
-    rows.not( oral ).hide();
+  var oral = $('table.kategorien tr.oral');
+  var mc = $('table.kategorien tr.mc');
+  oral.show();
+  mc.hide();
 });
 
 $('#mc').click(function() {
-    var mc = rows.filter('.mc').show();
-    rows.not( mc ).hide();
+  var oral = $('table.kategorien tr.oral');
+  var mc = $('table.kategorien tr.mc');
+  mc.show();
+  oral.hide();
 });
 
 $('#all').click(function() {
-    rows.show();
+  $('table.kategorien tr').show();
 });
 </script>
