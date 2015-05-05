@@ -39,6 +39,9 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js {  headers['Content-Type'] = 'text/javascript' }
+      format.plist 
+      format.xml
+      format.json { render :json => @category.to_json(:include => {:questions => {:include => :answers }})}
     end
   end
 
