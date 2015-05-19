@@ -57,6 +57,10 @@
     <%= f.check_box :original_pruefung %>
   </div>
   <div class="field">
+    <%= f.label :mc %><br />
+    <%= f.check_box :mc %>
+  </div>
+  <div class="field">
     <%= f.label :type_id %><br />
     <%= f.select :type_id, Category::STATUS %>
   </div>
