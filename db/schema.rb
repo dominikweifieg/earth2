@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215160514) do
+ActiveRecord::Schema.define(version: 20150519111548) do
 
   create_table "answers", force: true do |t|
     t.text     "body"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141215160514) do
     t.boolean  "original_pruefung"
     t.integer  "type_id",           default: -1
     t.boolean  "is_iap",            default: false
+    t.boolean  "mc"
   end
 
   create_table "category_questions", force: true do |t|
