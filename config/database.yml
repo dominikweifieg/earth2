@@ -31,7 +31,7 @@ production:
   encoding: utf8
 
 kquest: 
-  adapter: mysql
+  adapter: mysql2
   host: db1051.mydbserver.com
   username: p25134d4
   password: kpEGCMh4N9
@@ -39,7 +39,7 @@ kquest:
   encoding: utf8
 
 legacy: 
-  adapter: mysql
+  adapter: mysql2
   host: db1131.mydbserver.com
   username: p25134d6
   password: 9LK2EMWCQFDkiK
