@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   require 'imobile'
   
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index, :fetch, :initial]
   before_action :check_access
 
