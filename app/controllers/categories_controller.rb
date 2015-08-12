@@ -36,6 +36,20 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    
+    if @receipt
+      product_id = @receipt[:product_id]
+      product_id = product_id.sub(/medizinfragen\./, "")
+      @category = Category.find_by_identifier(product_id)
+    elsif params[:product_id].present?
+      product_id = params[:product_id]
+      product_id = product_id.sub(/medizinfragen\./, "")
+      logger.info("product_id = #{product_id}")
+      @category = Category.find_by_identifier(product_id)
+    else
+      @category = Category.find(params[:id])
+    end
+    
     respond_to do |format|
       format.html {}
       format.js {  headers['Content-Type'] = 'text/javascript' }
