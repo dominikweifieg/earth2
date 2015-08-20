@@ -82,6 +82,7 @@ class CategoriesController < ApplicationController
       @category.area = @source_category.area
       @category.original_pruefung = @source_category.original_pruefung
       @category.type_id = @source_category.type_id
+      @category.identifier = "de.kreawi.mobile.#{@source_category.title.parameterize('_')}.iap".sub(/-/, "_")
     elsif params[:questions].present?
       logger.info("New Selected questions = #{@selected_questions}")
       @selected_questions ||= params[:questions].keys.join("_")
@@ -96,6 +97,7 @@ class CategoriesController < ApplicationController
       @category.area = ""
       @category.original_pruefung = @source_category.original_pruefung
       @category.type_id = @source_category.type_id
+      @category.identifier = "de.kreawi.mobile.#{@source_category.title.parameterize('_')}.iap".sub(/-/, "_")
     end
   end
 
