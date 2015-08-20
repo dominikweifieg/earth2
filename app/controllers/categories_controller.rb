@@ -139,6 +139,9 @@ class CategoriesController < ApplicationController
         @category.is_iap = true
     end
 
+    @app_names = @category.app_name ? @category.app_name.split(",") : Array.new
+    @areas = @category.area ? @category.area.split(",") : Array.new
+
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
