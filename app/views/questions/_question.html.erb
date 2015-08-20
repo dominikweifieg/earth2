@@ -1,1 +1,1 @@
-<li style="background-color:<% if question_counter % 2 == 0 %>#FFFFFF<% else %>#DDDDDD<% end %>"><%= question.body.html_safe %><%= link_to "Details", question %><br/><br/></li>
+<li id="question_<%= question.id %>" style="background-color:<% if question_counter % 2 == 0 %>#FFFFFF<% else %>#DDDDDD<% end %>"><%= question.body.html_safe %><%= link_to "Details", question %>&nbsp;<a data-confirm="Ganz sicher?" data-method="delete" data-remote="true" href="/questions/<%= question.id %>?category=<%= @category.id %>" rel="nofollow">L&ouml;schen</a><br/><br/></li>
