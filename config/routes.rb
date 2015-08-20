@@ -6,6 +6,7 @@ Earth2::Application.routes.draw do
     member do
       post 'fetch'
       get 'initial'
+      get 'itunesconnect'
     end
   end
   

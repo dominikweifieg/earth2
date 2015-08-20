@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Earth2</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <h1>iKreawi Earth</h1>
+  <h2>Submit "<%= @category.title.html_safe %>" to iTunes Connect</h2>
+  
+  <ol>
+    <li>Log in to <a href="https://itunesconnect.apple.com" target="_blank">https://itunesconnect.apple.com</a></li>
+    <li>Go to "My Apps"</li>
+    <li>Select the app "<%= @app_name%>"</li>
+    <li>Select "In-App Purchases"</li>
+    <li>Tap on "Create New"</li>
+    <li>Select "Non-Consumeable"</li>
+    <li>For Reference Name, enter: "<%= @category.title.html_safe%>"</li>
+    <li>For Product ID, enter: "<%= @category.identifier %>"</li>
+    <li>Choose "Cleared for Sale" -> "Yes" and set a Price Tier</li>
+    <li>Click on "Add Language"</li>
+    <li>Make sure Language is set to "German"</li>
+    <li>As display name, enter a short name for the In App Purchase</li>
+    <li>As description, enter something like: "<%= @category.title.html_safe %> (<%= @category.questions.count%> Fragen)"</li>
+    <li>Upload a screenshot</li>
+    <li>Click on Save</li>  
+  </ol>
+  <p><a href="#" onclick="window.close();return false;">Fenster schliessen</a></p>
+</body>
+</html>

@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   require 'imobile'
   
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:edit, :update, :destroy, :itunesconnect]
   before_action :authenticate_user!, except: [:show, :index, :fetch, :initial]
   before_action :check_access
 
@@ -176,6 +176,13 @@ class CategoriesController < ApplicationController
     app_name = "iKreawi" unless app_name
     @category = Category.find(:first, :conditions => ["original_pruefung = :original_pruefung AND app_name = :app_name", {:original_pruefung => true, :app_name => app_name}], :order => "created_at DESC")
     render :text => @category.identifier
+  end
+  
+  def itunesconnect 
+    @app_name = params[:app_name]
+    respond_to do |format|
+      format.html { render :layout => false }
+    end
   end
 
   private
