@@ -14,8 +14,20 @@ class Category < ActiveRecord::Base
     scope :not_in_app, -> { where(is_iap: false) }
     scope :typo3, -> {where(old_type: 'typo3', is_iap: false)}
     scope :kquest, -> {where(old_type: ['set','cat'])}
+    scope :app_name, ->(app_name) {where("app_name LIKE ?", "%#{app_name}%")}
     
     STATUS = [['', -1], ['Basic', '0'], ['Advanced', '1'], ['Professional', '2']]
+    
+    @@APP_NAMES = ['iKreawi','Medizinfragen','Anatomie','Physiologie']
+    @@AREAS = ['Krankenpfleger/-in','Physiotherapeut/-in','Rettungsassistent/-in','Hebamme','Altenpflege','Pharmareferent','Arzthelfer/-in','Medizinstudent']
+    
+      def self.app_names 
+        @@APP_NAMES
+      end
+    
+      def self.areas 
+        @@AREAS
+      end
     
     def self.updated_since(date, app_name)
       logger.info("updated_since #{date}")

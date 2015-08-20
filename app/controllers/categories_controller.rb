@@ -53,6 +53,9 @@ class CategoriesController < ApplicationController
       @category = Category.find(params[:id])
     end
     
+    @app_names = @category.app_name ? @category.app_name.split(",") : Array.new
+    @areas = @category.area ? @category.area.split(",") : Array.new
+    
     logger.info("Category is #{@category.identifier}, creation date: #{@category.created_at} #{@category.created_at.class}")
     
     respond_to do |format|
@@ -99,10 +102,14 @@ class CategoriesController < ApplicationController
       @category.type_id = @source_category.type_id
       @category.identifier = "de.kreawi.mobile.#{@source_category.title.parameterize('_')}.iap".sub(/-/, "_")
     end
+    @app_names = @category.app_name ? @category.app_name.split(",") : Array.new
+    @areas = @category.area ? @category.area.split(",") : Array.new
   end
 
   # GET /categories/1/edit
   def edit
+    @app_names = @category.app_name ? @category.app_name.split(",") : Array.new
+    @areas = @category.area ? @category.area.split(",") : Array.new
   end
 
   # POST /categories
@@ -111,6 +118,12 @@ class CategoriesController < ApplicationController
     if params[:existing_in_app].present?
       @category = Category.find_by_id(params[:existing_in_app])
     else 
+      if params[:app_names_raw].present? 
+        params[:category][:app_name] = params[:app_names_raw].join(",")
+      end
+      if params[:areas_raw].present? 
+        params[:category][:area] = params[:areas_raw].join(",")
+      end
       @category = Category.new(category_params)
     end 
     if params[:selected_questions].present?
@@ -148,6 +161,12 @@ class CategoriesController < ApplicationController
       @category.questions << questions
     end
     respond_to do |format|
+      if params[:app_names_raw].present? 
+        params[:category][:app_name] = params[:app_names_raw].join(",")
+      end
+      if params[:areas_raw].present? 
+        params[:category][:area] = params[:areas_raw].join(",")
+      end
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
         format.json { head :no_content }
