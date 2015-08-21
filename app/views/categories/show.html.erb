@@ -14,11 +14,6 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @category.description %>
-</p>
-
-<p>
   <strong>Identifier:</strong>
   <%= @category.identifier %>
 </p>
@@ -41,6 +36,11 @@
 <p>
   <strong>Area:</strong>
   <%= @category.area %>
+</p>
+
+<p>
+  <strong>Fachbereich:</strong>
+  <%= @category.description %>
 </p>
 
 <% if @category.original_pruefung %>

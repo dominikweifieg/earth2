@@ -78,7 +78,7 @@ class CategoriesController < ApplicationController
       @source_category = Category.find_by_id(params[:id])
       @category.title = @source_category.title
       @category.short_title = @source_category.short_title
-      @category.description = "Created from #{@source_category.title} (KQuest #{@source_category.old_type}:#{@source_category.old_uid})"
+      @category.description = ""
       @category.old_type = @source_category.old_type
       @category.old_uid = @source_category.old_uid
       @category.app_name = @source_category.app_name
@@ -93,7 +93,7 @@ class CategoriesController < ApplicationController
       @source_category = first_question.import_category
       @category.title = @source_category.title
       @category.short_title = @source_category.short_title
-      @category.description = "Created from #{@source_category.title} (Typo3 Katgorie:#{@source_category.old_uid})"
+      @category.description = ""
       @category.old_type = @source_category.old_type
       @category.old_uid = @source_category.old_uid
       @category.app_name = "iKreawi"

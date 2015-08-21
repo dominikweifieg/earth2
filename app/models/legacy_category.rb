@@ -28,14 +28,20 @@ class LegacyCategory < ActiveRecord::Base
         puts "Title: #{lc.title}, myTitle: #{myTitle}"
         #puts "Title encoding: #{lc.title.encoding}"
         #puts "myTitle encoding: #{myTitle.encoding}"
+        
+        old_time_stamp = 0
+        needs_iap_updates = false
+        
         category = Category.find_by_old_uid_and_old_type(lc.uid, 'typo3')
         if(category)
           # category.questions.clear
           puts "Found? #{category.title}"
+          # old_time_stamp = category.updated_at.to_i
           category.touch
+          
         else
           puts "Create category"
-          category = Category.new(:title => myTitle, :short_title => myTitle, :description => myTitle, 
+          category = Category.new(:title => myTitle, :short_title => myTitle, :description => "", 
             :old_uid => lc.uid, :old_type => 'typo3', :identifier => "de.kreawi.mobile.#{myTitle.parameterize('_')}".sub(/-/, "_"), :app_name => "iKreawi", :is_iap => false)
             category.save!
         end
@@ -68,6 +74,11 @@ class LegacyCategory < ActiveRecord::Base
             #<link fileadmin/pdf-files_pro/herzinsuffizienz_klinik.pdf _blank download>siuhoisuh skdjhfgig asdf</link>
             question.comment = comment.gsub(/<link (.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http://www.kreawi-online.de/\1" target="\2" class="\3">\4</a>') 
             category.questions << question unless category.questions.exists?(question)
+            # puts "TSTAMP #{legacy_question.tstamp} | #{old_time_stamp}"
+            if legacy_question.tstamp > old_time_stamp 
+              needs_iap_updates = true
+              # puts "Needs update"
+            end
           else
             question = Question.new do |q|
               q.old_type = 'typo3'
@@ -93,6 +104,7 @@ class LegacyCategory < ActiveRecord::Base
               q.comment = comment.gsub(/<link (.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http://www.kreawi-online.de/\1" target="\2" class="\3">\4</a>') 
             end
             category.questions << question  
+            needs_iap_updates = true
           end
           question.save!
           unless(legacy_question.questiontype == 3)
@@ -114,6 +126,14 @@ class LegacyCategory < ActiveRecord::Base
           end
         end
         category.save!
+        if needs_iap_updates
+          puts "Touching iaps"
+          category.in_app_categories.each do |c| 
+            c.touch
+            puts "Touched #{c.title}"
+          end
+        end
+        
       end
     end
   end

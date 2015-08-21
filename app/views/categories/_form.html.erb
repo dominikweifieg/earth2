@@ -29,10 +29,6 @@
     <%= f.text_field :short_title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
     <%= f.label :identifier %><br>
     <%= f.text_field :identifier %>
   </div>
@@ -55,6 +51,14 @@
     <%= Category.areas.each do |area| %>
     <%= check_box_tag "areas_raw[]", area, @areas.include?(area) %><%= area %><br/>
     <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :description, "Fachbereich" %><br>
+    <%= radio_button_tag 'category[description]', "", @category.description == "" %> Kein Fachbereich
+    <% [ 'Anatomie', 'Biochemie', 'Medizinstudium', 'Notfallmedizin', 'Pathologie', 'Physikum', 'Physiologie' ].each do |description| %>
+          <br><%= radio_button_tag 'category[description]', description, @category.description == description %>
+          <%= description %>
+        <% end %>
   </div>
   <div class="field">
     <%= f.label :original_pruefung %><br />

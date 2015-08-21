@@ -34,8 +34,8 @@ class Category < ActiveRecord::Base
       Category.in_app.find(:all, :conditions => ["updated_at > :date AND app_name = :app_name", {:date => date, :app_name => app_name} ])
     end 
     
-    def in_app_category
-      Category.in_app.find(:first, :conditions => ["old_type = :old_type AND old_uid = :old_uid", {old_type: self.old_type, old_uid: self.old_uid}])
+    def in_app_categories
+      Category.in_app.find(:all, :conditions => ["old_type = :old_type AND old_uid = :old_uid", {old_type: self.old_type, old_uid: self.old_uid}])
     end
     
 end
