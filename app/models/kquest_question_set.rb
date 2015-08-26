@@ -19,6 +19,7 @@ class KquestQuestionSet < ActiveRecord::Base
       if(category)
         # category.questions.clear
         old_time_stamp = category.updated_at.to_i
+        category.old_type = 'set'
         category.touch
         puts "Found #{lc.set_name}"
       else
