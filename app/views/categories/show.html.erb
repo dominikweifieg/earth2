@@ -60,8 +60,9 @@
 
 <p>
   <strong>Importiert von <% if @category.old_type == 'set' %>
-    <%= link_to "KQuest Fragenset #{@category.title}", kquest_question_set_path(@category.old_uid) %><% else %>
-    <%= link_to "KQuest Kategory #{@category.title}", kquest_category_path(@category.old_uid) %><% end %></strong>
+    <%= link_to "KQuest Fragenset #{@category.title}", kquest_question_set_path(@category.old_uid) %><% elsif @category.old_type == 'cat'%>
+    <%= link_to "KQuest Kategory #{@category.title}", kquest_category_path(@category.old_uid) %><% else %>
+    <%= link_to "Typo3 Kategory #{@category.title}", legacy_category_path(@category.old_uid) %><% end %></strong>
 </p>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
