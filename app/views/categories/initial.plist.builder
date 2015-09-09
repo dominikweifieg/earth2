@@ -34,9 +34,7 @@ xml.plist("version" => "1.0") {
               xml.cdata!(question.comment)
             }
             xml.key("old_uid")
-            xml.string {
-              xml.cdata!(question.old_uid)
-            }
+            xml.integer(question.old_uid)
             xml.key("Answers")
             xml.array {
               question.answers.each do |answer|
