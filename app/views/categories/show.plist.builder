@@ -19,6 +19,8 @@ xml.plist("version" => "1.0") {
       xml.string(@category.short_title)
       xml.key("Subject")
       xml.string(@category.description)
+      xml.key("Area")
+      xml.string(@category.area)
       xml.key("Type_Id")
       xml.integer(@category.type_id.to_s)
       xml.key("Questions")
