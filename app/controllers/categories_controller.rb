@@ -41,13 +41,13 @@ class CategoriesController < ApplicationController
       product_id = @receipt[:product_id]
       logger.info("We have a receipt and the product_id is #{product_id}")
       product_id = product_id.sub(/medizinfragen\./, "")
-      @category = Category.find_by_identifier(product_id)
+      @category = Category.in_app.find_by_identifier(product_id)
     elsif params[:product_id].present?
       product_id = params[:product_id]
       logger.info("We have a product_id which is #{product_id}")
       product_id = product_id.sub(/medizinfragen\./, "")
       logger.info("product_id = #{product_id}")
-      @category = Category.find_by_identifier(product_id)
+      @category = Category.in_app.find_by_identifier(product_id)
     else
       logger.info("looking up the category by id #{params[:id]}")
       @category = Category.find(params[:id])

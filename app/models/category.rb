@@ -2,7 +2,7 @@ class Category < ActiveRecord::Base
   
     # has_many :questions, :dependent => :destroy, :order => :id
     validates :identifier, :title, :short_title, presence: true
-    validates :identifier, uniqueness: true 
+    # validates :identifier, uniqueness: true
     
     
     has_many :category_questions, :dependent => :destroy
