@@ -1,7 +1,8 @@
 set :application, "earth2" 
 set :repository,  "git@github.com:dominikweifieg/earth2.git"
 set :domain, "vr10235.webspaceconfig.de"
-set :use_sudo, false
+#set :use_sudo, false
+set :use_sudo, true
 #set :user, "deployer"
 set :user, "vr10235"
 
