@@ -6,7 +6,7 @@ set :use_sudo, false
 set :user, "vr10235"
 
 # set :rake, "/home/deployer/.rvm/gems/ruby-1.9.3-p448@global/bin/rake"
-set :rake "/home/vr10235/.rvm/rubies/ruby-1.9.3-p551/bin/rake"
+set :rake, "/home/vr10235/.rvm/rubies/ruby-1.9.3-p551/bin/rake"
 
 # If you have previously been relying upon the code to start, stop 
 # and restart your mongrel application, or if you rely on the database
