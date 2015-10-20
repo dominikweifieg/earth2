@@ -215,7 +215,7 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:title, :short_title, :description, :identifier, :old_uid, :app_name, :area, :original_pruefung, :type_id, :old_type)
+      params.require(:category).permit(:title, :short_title, :description, :identifier, :old_uid, :app_name, :area, :original_pruefung, :type_id, :old_type, :mc)
     end
     
     def check_itunes_receipt(receipt)
