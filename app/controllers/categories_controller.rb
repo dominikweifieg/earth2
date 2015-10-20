@@ -120,9 +120,13 @@ class CategoriesController < ApplicationController
     else 
       if params[:app_names_raw].present? 
         params[:category][:app_name] = params[:app_names_raw].join(",")
+      else 
+        params[:category][:app_name] = ""
       end
       if params[:areas_raw].present? 
         params[:category][:area] = params[:areas_raw].join(",")
+      else 
+        params[:category][:area] = ""
       end
       @category = Category.new(category_params)
     end 
@@ -166,9 +170,13 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if params[:app_names_raw].present? 
         params[:category][:app_name] = params[:app_names_raw].join(",")
+      else 
+        params[:category][:app_name] = ""
       end
       if params[:areas_raw].present? 
         params[:category][:area] = params[:areas_raw].join(",")
+      else 
+        params[:category][:area] = ""
       end
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }

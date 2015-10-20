@@ -59,6 +59,11 @@
 <% end %>
 
 <p>
+  <strong>MC: </strong>
+  <% if @category.mc %>Yes<% else %>No<% end %>
+</p>
+
+<p>
   <strong>Importiert von <% if @category.old_type == 'set' %>
     <%= link_to "KQuest Fragenset #{@category.title}", kquest_question_set_path(@category.old_uid) %><% elsif @category.old_type == 'cat'%>
     <%= link_to "KQuest Kategory #{@category.title}", kquest_category_path(@category.old_uid) %><% else %>
