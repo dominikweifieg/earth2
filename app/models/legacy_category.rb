@@ -9,7 +9,7 @@ class LegacyCategory < ActiveRecord::Base
   has_many :legacy_category_questions, :foreign_key => :uid_foreign, :primary_key => :uid
   has_many :legacy_questions, :through => :legacy_category_questions
   
-  scope :ikreawi_categories, -> {where("title LIKE 'APP_ikreawi%' AND deleted = 0 AND hidden = 0")}
+  scope :ikreawi_categories, -> {where("title LIKE 'APP_%' AND deleted = 0 AND hidden = 0")}
   
   def primary_key
     "uid"
@@ -24,7 +24,7 @@ class LegacyCategory < ActiveRecord::Base
       puts "Importing all!"
       categories = LegacyCategory.ikreawi_categories
       categories.each do |lc| 
-        myTitle = lc.title[12, lc.title.length]
+        myTitle = lc.title[4, lc.title.length]
         puts "Title: #{lc.title}, myTitle: #{myTitle}"
         #puts "Title encoding: #{lc.title.encoding}"
         #puts "myTitle encoding: #{myTitle.encoding}"
