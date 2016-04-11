@@ -121,7 +121,11 @@ class CategoriesController < ApplicationController
       if params[:app_names_raw].present? 
         params[:category][:app_name] = params[:app_names_raw].join(",")
       else 
-        params[:category][:app_name] = ""
+        if params[:additional_app].present? 
+          params[:category][:app_name] = params[:additional_app]
+        else 
+          params[:category][:app_name] = ""
+        end
       end
       if params[:areas_raw].present? 
         params[:category][:area] = params[:areas_raw].join(",")
