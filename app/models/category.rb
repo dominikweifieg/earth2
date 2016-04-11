@@ -19,11 +19,19 @@ class Category < ActiveRecord::Base
     
     STATUS = [['', -1], ['Basic', '0'], ['Advanced', '1'], ['Professional', '2']]
     
-    @@APP_NAMES = ['iKreawi','Medizinfragen','Anatomie','Physiologie']
+    # @@APP_NAMES = ['iKreawi','Medizinfragen','Anatomie','Physiologie']
     @@AREAS = ['Krankenpfleger/-in','Physiotherapeut/-in','Rettungsassistent/-in','Hebamme','Altenpflege','Pharmareferent','Arzthelfer/-in','Medizinstudent']
     
       def self.app_names 
-        @@APP_NAMES
+        apps_raw = Category.in_app.pluck('DISTINCT app_name')
+        set = Set.new
+        apps_raw.each do |raw| 
+          split = raw.split(",")
+          split.each {|part| set << part}
+        end
+        apps = Array.new()
+        set.each {|item| apps << item}
+        return apps
       end
     
       def self.areas 
