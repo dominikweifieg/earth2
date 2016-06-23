@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
     app_name = params[:app_name]
     app_name = "iKreawi" unless app_name
     if params[:updated_after].present?
-      @categories = Category.updated_since(params[:updated_after], app_name)
+      @categories = Category.in_app.updated_since(params[:updated_after], app_name)
       @token = daily_token
     elsif params[:original_questions].present?
       @categories = Category.find(:all, :conditions => ["original_pruefung = :original_pruefung AND app_name = :app_name", {:original_pruefung => params[:original_questions], :app_name => app_name}])
@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
     else
       case request.format
       when Mime::JSON
-        @categories = Category.find(:all, :conditions => ["app_name = :app_name", {:app_name => app_name}])
+        @categories = Category.in_app.find(:all, :conditions => ["app_name = :app_name", {:app_name => app_name}])
       else
         @categories = Category.not_in_app.kquest.all
       end
