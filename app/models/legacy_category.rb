@@ -80,6 +80,7 @@ class LegacyCategory < ActiveRecord::Base
               needs_iap_updates = true
               # puts "Needs update"
             end
+            question.save!
           else
             question = Question.new do |q|
               q.old_type = 'typo3'
