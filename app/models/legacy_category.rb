@@ -72,8 +72,9 @@ class LegacyCategory < ActiveRecord::Base
             question.body = body
             comment = legacy_question.commentedanswer
             #<link fileadmin/pdf-files_pro/herzinsuffizienz_klinik.pdf _blank download>siuhoisuh skdjhfgig asdf</link>
-            question.comment = comment.gsub(/<link file:(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http://www.kreawi-online.de/file:\1" target="\2" class="\3">\4</a>') 
-            question.comment = question.comment.gsub(/<link http(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http\1" target="\2" class="\3">\4</a>') 
+            firstpass = comment.gsub(/<link file:(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http://www.kreawi-online.de/file:\1" target="\2" class="\3">\4</a>') 
+            secondpass = question.comment.gsub(/<link http(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http\1" target="\2" class="\3">\4</a>') 
+            question.comment = secondpass
             category.questions << question unless category.questions.exists?(question)
             # puts "TSTAMP #{legacy_question.tstamp} | #{old_time_stamp}"
             if legacy_question.tstamp > old_time_stamp 
@@ -103,8 +104,9 @@ class LegacyCategory < ActiveRecord::Base
               q.body = body
               comment = legacy_question.commentedanswer
               #<link fileadmin/pdf-files_pro/herzinsuffizienz_klinik.pdf _blank download>siuhoisuh skdjhfgig asdf</link>
-              q.comment = comment.gsub(/<link file:(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http://www.kreawi-online.de/file:\1" target="\2" class="\3">\4</a>') 
-              q.comment = question.comment.gsub(/<link http(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http\1" target="\2" class="\3">\4</a>') 
+              firstpass = comment.gsub(/<link file:(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http://www.kreawi-online.de/file:\1" target="\2" class="\3">\4</a>') 
+              secondpass = question.comment.gsub(/<link http(.*?) (.*?) (.*?)>(.*?)<\/link>/, '<a href="http\1" target="\2" class="\3">\4</a>') 
+              q.comment = secondpass
             end
             category.questions << question  
             needs_iap_updates = true
