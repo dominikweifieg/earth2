@@ -37,7 +37,7 @@ end
 
 gem "devise", "~> 3.0.0"
 
-gem "mysql"
+gem "mysql", '~> 0.3.20'
 
 gem "imobile"
 
